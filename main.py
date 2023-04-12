@@ -100,3 +100,13 @@ async def read_item(db: Session = Depends(database.get_db)):
     # db.commit()
     # db.refresh(db_parent)
     return {"item_id": db_parent.children}
+
+
+@app.get("/F")
+async def read_item(db: Session = Depends(database.get_db)):
+    db_parent = model.F_Parent(parentName="Bob F")
+    db_child = model.F_Child(childName="Chintu F", parent=db_parent)  # cannot pass list in parent
+    db.add(db_child)
+    db.commit()
+
+    return {"item_id": db_parent.children}
