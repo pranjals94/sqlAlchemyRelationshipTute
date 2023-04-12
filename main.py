@@ -68,7 +68,7 @@ async def read_item(db: Session = Depends(database.get_db)):
     # parent = db.get(model.B_Parent, 1) #  we can either use db.get(model.B_Parent or model.B_Child) using both
     # together gives error.
     child = db.get(model.B_Child, 1)
-    print(child.parent)  # if we don't use this statement here , only parent_id is sent in the return statement
+    # print(child.parent)  # if we don't use this statement here , only parent_id is sent in the return statement ( in case lazy='select' default value in ORM Relationship setting)
 
     return {"child": child}
 
@@ -98,7 +98,7 @@ async def read_item(db: Session = Depends(database.get_db)):
     # db_parent.children = db_child_1
     # db.add(db_parent)
     # db.commit()
-    # db.refresh(db_parent)
+    db.refresh(db_parent)
     return {"item_id": db_parent.children}
 
 
@@ -110,5 +110,3 @@ async def read_item(db: Session = Depends(database.get_db)):
     db.commit()
 
     return {"item_id": db_parent.children}
-
-

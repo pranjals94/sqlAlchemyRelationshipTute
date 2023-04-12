@@ -34,7 +34,8 @@ class B_Child(Base):
     id = Column(Integer, primary_key=True)
     childName = Column(String(50))
     parent_id = Column(Integer, ForeignKey("B_parent_table.id"))
-    parent = relationship("B_Parent", back_populates="children")
+    parent = relationship("B_Parent", back_populates="children", lazy='immediate') # immediately loads the relation
+    # object
 
 
 # Alternatively, the relationship.backref option may be used on a single relationship() instead of using
