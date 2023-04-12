@@ -107,4 +107,15 @@ class F_Child(Base):
     id = Column(Integer, primary_key=True)
     childName = Column(String(50))
     parent_id = Column(Integer, ForeignKey("F_parent_table.id"), nullable=False)
-    parent = relationship("F_Parent", backref=backref("children", uselist=False)) #  uselist=False will allow only a object and will prevent passing array, or list
+    parent = relationship("F_Parent", backref=backref("children",
+                                                      uselist=False))  # uselist=False will allow only a object and will prevent passing array, or list
+
+
+# relationship within same table implimentation
+class G_User(Base):
+    __tablename__ = "G_user"
+    id = Column(Integer, primary_key=True)
+    parentName = Column(String(50))
+    created_by_id = Column(Integer, ForeignKey("G_user.id"))  # self Foreign key
+
+# Sql triggers refer docs
