@@ -107,7 +107,7 @@ class F_Child(Base):
     __tablename__ = "F_child_table"
     id = Column(Integer, primary_key=True)
     childName = Column(String(50))
-    parent_id = Column(Integer, ForeignKey("F_parent_table.id"), nullable=False)
+    parent_id = Column(Integer, ForeignKey("F_parent_table.id", ondelete="CASCADE"), nullable=False)
     parent = relationship("F_Parent", backref=backref("children",
                                                       uselist=False))  # uselist=False will allow only a object and will prevent passing array, or list
 
