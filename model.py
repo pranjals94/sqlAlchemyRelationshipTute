@@ -56,12 +56,12 @@ class C_Child(Base):
     # parent = relationship("C_Parent", back_populates="children") # cant use this statement when using backref in parent
 
 
-# Using foreign key ON DELETE c ascade
+# Using foreign key ON DELETE cascade
 class D_Parent(Base):
     __tablename__ = "D_parent_table"
     id = Column(Integer, primary_key=True)
     parentName = Column(String(50))
-    children = relationship("D_Child", backref="parent", cascade="all, delete",
+    children = relationship("D_Child", cascade="all, delete",
                             passive_deletes=True, )  # delete all its child on deletion
 
 
